@@ -4,13 +4,14 @@
 
 import importlib
 import asyncio
+from typing import List
 
 MODULE_NAME = '0-basic_async_syntax'
 module = importlib.import_module(MODULE_NAME)
 wait_random = getattr(module, 'wait_random')
 
 
-async def wait_n(n: int, max_delay: int) -> list:
+async def wait_n(n: int, max_delay: int) -> List[float]:
     """Executes multiple coroutines concurrently.
 
     This asynchronous coroutine takes two integer arguments,
