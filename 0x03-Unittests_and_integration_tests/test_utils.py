@@ -10,6 +10,7 @@ from typing import (
 from utils import access_nested_map, get_json, memoize
 from parameterized import parameterized
 
+
 # task 0
 class TestAccessNestedMap(unittest.TestCase):
     """TestAccessNestedMap Class"""
@@ -39,6 +40,7 @@ class TestAccessNestedMap(unittest.TestCase):
             self.assertEqual(expected, err.exception)
 # end of task 1
 
+
 # task 2
 class TestGetJson(unittest.TestCase):
     """TestGetJson Class"""
@@ -56,6 +58,7 @@ class TestGetJson(unittest.TestCase):
         with patch("requests.get", return_value=mock):
             self.assertEqual(get_json(test_url), test_payload)
 # end of task 2
+
 
 # task 3
 class TestMemoize(unittest.TestCase):
