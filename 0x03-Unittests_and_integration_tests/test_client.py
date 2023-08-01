@@ -7,6 +7,7 @@ from client import GithubOrgClient
 from fixtures import TEST_PAYLOAD
 from parameterized import parameterized
 
+
 # task 4
 class TestGithubOrgClient(unittest.TestCase):
     """TestGithubOrgClient Class"""
@@ -22,17 +23,19 @@ class TestGithubOrgClient(unittest.TestCase):
         """Test GithubOrgClient.org"""
         github_client = GithubOrgClient(org_name)
         github_client.org()
-        mock_get_json.assert_called_once_with(f'https://api.github.com/orgs/{org_name}')
+        mock_get_json.assert_called_once_with(
+            f'https://api.github.com/orgs/{org_name}')
 # end of task 4
 
 # task 5
     def test_public_repos_url(self):
         """Test GithubOrgClient._public_repos_url"""
-        with patch('client.GithubOrgClient._public_repos_url', new_callable=PropertyMock)\
-             as mock_public_repos_url:
+        with patch('client.GithubOrgClient._public_repos_url',
+                   new_callable=PropertyMock) as mock_public_repos_url:
             mock_public_repos_url.return_value = TEST_PAYLOAD
             github_client = GithubOrgClient('test')
-            self.assertEqual(github_client._public_repos_url, mock_public_repos_url.return_value)
+            self.assertEqual(github_client._public_repos_url,
+                             mock_public_repos_url.return_value)
             mock_public_repos_url.assert_called_once()
 # end of task 5
 
@@ -40,13 +43,15 @@ class TestGithubOrgClient(unittest.TestCase):
     @patch('client.get_json')
     def test_public_repos(self, mock_get_json: MagicMock):
         """Test GithubOrgClient.public_repos"""
-        with patch('client.GithubOrgClient._public_repos_url', new_callable=PropertyMock)\
-              as mock_public_repos_url:
+        with patch('client.GithubOrgClient._public_repos_url',
+                   new_callable=PropertyMock) as mock_public_repos_url:
             mock_public_repos_url.return_value = TEST_PAYLOAD
             github_client = GithubOrgClient('test')
-            self.assertEqual(github_client.public_repos(), mock_get_json.return_value)
+            self.assertEqual(github_client.public_repos(),
+                             mock_get_json.return_value)
             mock_public_repos_url.assert_called_once()
-            mock_get_json.assert_called_once_with(mock_public_repos_url.return_value)
+            mock_get_json.assert_called_once_with(
+                mock_public_repos_url.return_value)
 # end of task 6
 
 # task 7
@@ -59,8 +64,10 @@ class TestGithubOrgClient(unittest.TestCase):
     def test_has_license(self, repo: dict, license_key: str, expected: bool):
         """Test GithubOrgClient.has_license"""
         github_client = GithubOrgClient('test')
-        self.assertEqual(github_client.has_license(repo, license_key), expected)
+        self.assertEqual(github_client.has_license(repo, license_key),
+                         expected)
 # end of task 7
+
 
 # task 8
 class TestIntegrationGithubOrgClient(unittest.TestCase):
